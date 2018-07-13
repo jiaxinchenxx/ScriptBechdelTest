@@ -21,9 +21,13 @@ def countFemaleofScene(scene, FemaleDic):
         dialogue = scene[i]
         if dialogue[0] in FemaleDic and i + 1 < len(scene):
             femaleCnt.add(dialogue[0])
-
+               
             cnt = i + 1
-            if scene[cnt][0] != dialogue[0] and scene[cnt][0] in FemaleDic:
+            
+            FemaleA = dialogue[0]
+            FemaleB = scene[cnt][0]
+            
+            if FemaleA != FemaleB and FemaleA not in FemaleB and FemaleB not in FemaleA and scene[cnt][0] in FemaleDic:
                 femaleDialogue = []
                 femaleDialogue.append(dialogue)
 
