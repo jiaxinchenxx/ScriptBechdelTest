@@ -13,41 +13,6 @@ SavePath = '.\\'
 saveName = 'Scripts.pkl'
 MAX_FILES = 1087
 
-'''
-files = os.listdir('.\Texts2')
-CUTTO = 0
-DISSOLVETO = 0
-TOTAL = len(files)
-for file in files:
-
-    with codecs.open(os.path.join(Path, file), 'r', encoding = 'utf-8') as f:
-        lines = f.readlines()
-
-    Flag = False
-    for line in lines:
-        if 'CUT TO:' in line:
-            CUTTO += 1
-            Flag = True
-            break
-        if 'DISSOLVE TO' in line:
-            DISSOLVETO += 1
-            Flag = True
-            break
-    if not Flag:
-        print file
-
-print TOTAL, CUTTO, DISSOLVETO
-
-'''
-"""
-class Script_info(object):
-
-    def __init__(self, Scenes, GenderDic, CharacterDic):
-        self.Scenes = Scenes
-        self.GenderDic = GenderDic
-        self.CharacterDic = CharacterDic
-"""
-
 class ScriptReader(object):
 
     def __init__(self, num_scripts):
@@ -133,19 +98,3 @@ if __name__ == '__main__':
     reader.Initializer()
     reader.saveScriptDic(SavePath, saveName)
 
-
-'''
-reader = ScriptReader()
-reader.Initializer()
-#print len(reader.scriptDic)
-for key in reader.scriptDic['Avengers, The (2012).txt'].GenderDic.keys():
-    print key
-    print reader.scriptDic['Avengers, The (2012).txt'].GenderDic[key]
-'''
-"""
-for i, scene in enumerate(Scenes):
-    if scene != []:
-        print 'Scene, {}:'.format(i)
-        for dialogue in scene:
-            print dialogue
-"""
