@@ -15,36 +15,21 @@ MaleFeatures = ['mr', 'man', 'boy', 'gentleman', 'sir', 'father', 'dad', 'daddy'
 
 tokenizer = RegexpTokenizer(r'[A-Z]+')
 
-def gender_gusser_without_feature(entity):
 
+# this methods is very expensive, and it's the bottleneck of the code.
+# most of the time will be consumed in determining whether the character is Male or Female
+# the library here is a opensource library called gender_detector,
+# the installation instruction could be seen in README.txt
 
-    entity = tokenizer.tokenize(entity)
-
-#    for ff in FemaleFeatures:
-#        if ff.upper() in entity:
-#            return 'female'
-#    for mf in MaleFeatures:
-#        if mf.upper() in entity:
-#            return 'male'
-
-
-    for name in entity:
-        if name == 'THE' or name == 'YOUNG' or name == 'OLD':
-            continue
-        #print name
-        for detec in detector:
-            gender = detec.guess(name)
-            if gender != 'unknown':
-                return gender
-
-#        for fs in FemaleSuffix:
-#            if len(fs) < len(name) and fs.lower() == name[len(name) - len(fs):].lower():
-#                return 'female'
-
-
-    return 'unknown'
 
 def gender_gusser(entity, withFeature = False):
+    '''
+
+    :param entity: The name enitity found in the scripts
+    :param withFeature: if True, then Character like LITTLE GIRL, OLD WOMEN will be counted as a Female Character
+                        if False, only Female name like Helen, Hannah will be counted as a Female Character
+    :return: gender of entity
+    '''
 
     entity = tokenizer.tokenize(entity)
 
@@ -68,9 +53,7 @@ def gender_gusser(entity, withFeature = False):
 
         if withFeature:
             for fs in FemaleSuffix:
-                if len(fs) < len(name) and fs.lower() == name[len(name) - len(fs):].lower():
+                if name.lower().endswith(fs):
                     return 'female'
-
-
 
     return 'unknown'
